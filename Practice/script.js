@@ -1,41 +1,80 @@
 const profile = [
   {
+    id: 1,
     name: "Ashwini",
-    hobbies: [
+  },
+  {
+    id: 10,
+    name: "Vishal",
+  },
+];
+
+const orders = [
+  {
+    userId: 1,
+    productId: 101,
+    productName: "Samsung Galaxy s2",
+  },
+  {
+    userId: 1,
+    productId: 102,
+    productName: "Samsung Galaxy Watch",
+  },
+  {
+    userId: 10,
+    productId: 103,
+    productName: "Samsung LED TV",
+  },
+];
+
+const findUsersOrders = () => {
+  const finalDetails = [];
+  for (let i = 0; i < profile.length; i++) {
+    for (let j = 0; j < orders.length; j++) {
+      if (profile[i].id == orders[j].userId) {
+        finalDetails.push({
+          userid: profile[i].id,
+          name: profile[i].name,
+          orders: [
+            {
+              productId: orders[j].productId,
+              productName: orders[j].productName,
+            },
+          ],
+        });
+      }
+    }
+  }
+  return finalDetails;
+};
+
+findUsersOrders();
+
+// Output Result
+
+const finalDetails = [
+  {
+    userId: 1,
+    name: "Ashwini",
+    orders: [
       {
-        id: 1,
-        title: "Music",
+        productId: 101,
+        productName: "Samsung Galaxy s2",
       },
       {
-        id: 2,
-        title: "Coding",
+        productId: 102,
+        productName: "Samsung Galaxy Watch",
       },
+    ],
+  },
+  {
+    userId: 10,
+    name: "Vishal",
+    orders: [
       {
-        id: 3,
-        title: "Biking",
+        productId: 103,
+        productName: "Samsung LED TV",
       },
     ],
   },
 ];
-
-// Hobbies -> 1
-
-const findHobby = (id) => {
-  for (let i = 0; i < profile.length; i++) {
-    if (profile[i].hobbies) {
-      const hobbies = profile[i].hobbies;
-      for (let j = 0; j < hobbies.length; j++) {
-        if (hobbies[j].id === id) {
-          console.log(hobbies[j].title);
-          return;
-        }
-      }
-    }
-    console.log("Not Exiest");
-  }
-};
-findHobby(1); // Music
-findHobby(2); // Coding
-findHobby(3); // "Biking",
-findHobby(5); // Not Exiest
-findHobby(10); // Not Exiest
